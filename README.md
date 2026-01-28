@@ -7,4 +7,5 @@ links to games are here
 95046961games-gravityball-x.edgeone.app           
 95046961games-echo-pulse.edgeone.app           
 95046961games-orbital-blaster.edgeone.app           
-obnoxious-harlequin-vaj2ezh1q4.edgeone.app
+obnoxious-harlequin-vaj2ezh1q4.edgeone.app                 
+https://just-maroon-sxshpvocrv.edgeone.app/
