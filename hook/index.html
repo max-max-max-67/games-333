@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grapple Swing 2026</title>
+    <style>
+        body { margin: 0; background: #050505; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
+        canvas { background: #0a0a1a; border: 3px solid #333; border-radius: 10px; cursor: crosshair; }
+        #ui { position: absolute; top: 20px; color: #0ff; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #0ff; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div id="ui">DISTANCE: <span id="score">0</span>m</div>
+    <canvas id="gameCanvas"></canvas>
+<script>
+const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+canvas.width = 900; canvas.height = 500;
+let dist = 0, isG = false, gPt = {x:0,y:0}, ropeL = 0; const grav = 0.25, fric = 0.99;
+const p = { x: 100, y: 250, r: 15, vx: 5, vy: 0 };
+const ceilings = [], spikes = []; let lastX = 0;
+function spawn(x) { ceilings.push({x:x,y:0,w:200,h:50}); if(Math.random()>0.4) spikes.push({x:x+50,y:460,w:100,h:40}); }
+for(let i=0; i<6; i++) { spawn(i*200); lastX = i*200; }
+canvas.onmousedown = (e) => {
+    let mouseX = e.clientX - canvas.offsetLeft + (p.x - 200);
+    if (e.clientY < 200) { isG = true; gPt = {x: mouseX, y: 50}; ropeL = Math.hypot(p.x - gPt.x, p.y - gPt.y); }
+};
+window.onmouseup = () => isG = false;
+function update() {
+    if (isG) {
+        let dx = p.x - gPt.x, dy = p.y - gPt.y, angle = Math.atan2(dy, dx);
+        p.vx += -Math.cos(angle) * 0.5; p.vy += -Math.sin(angle) * 0.5 + grav;
+        let d = Math.hypot(dx, dy); if (d > ropeL) { p.x = gPt.x + (dx/d)*ropeL; p.y = gPt.y + (dy/d)*ropeL; }
+    } else { p.vy += grav; }
+    p.vx *= fric; p.x += p.vx; p.y += p.vy;
+    if (p.x > dist) dist = Math.floor(p.x);
+    spikes.forEach(s => { if (p.x+15 > s.x && p.x-15 < s.x+s.w && p.y+15 > s.y) location.reload(); });
+    if (p.y > 500 || p.y < 0) location.reload();
+    if (p.x > lastX - 600) { lastX += 200; spawn(lastX); }
+    draw(); requestAnimationFrame(update);
+}
+function draw() {
+    ctx.clearRect(0,0,900,500); ctx.save(); ctx.translate(-(p.x-200), 0);
+    if(isG){ ctx.strokeStyle="#0ff"; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(gPt.x,gPt.y); ctx.stroke(); }
+    ctx.fillStyle="#111"; ceilings.forEach(c => ctx.fillRect(c.x,c.y,c.w,c.h));
+    ctx.fillStyle="#f04"; spikes.forEach(s => { for(let i=0;i<3;i++) { ctx.beginPath(); ctx.moveTo(s.x+(i*33), 500); ctx.lineTo(s.x+16+(i*33), 460); ctx.lineTo(s.x+33+(i*33), 500); ctx.fill(); }});
+    ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(p.x,p.y,15,0,7); ctx.fill();
+    ctx.restore(); document.getElementById('score').innerText = dist;
+}
+update();
+</script>
+</body>
+</html>
