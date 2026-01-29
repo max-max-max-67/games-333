@@ -9,3 +9,4 @@ https://95046961games-echo-pulse.edgeone.app
 https://95046961games-orbital-blaster.edgeone.app           
 https://obnoxious-harlequin-vaj2ezh1q4.edgeone.app                 
 https://just-maroon-sxshpvocrv.edgeone.app/
+https://95046961games-tetris.edgeone.app
