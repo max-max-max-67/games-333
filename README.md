@@ -11,4 +11,5 @@ https://obnoxious-harlequin-vaj2ezh1q4.edgeone.app
 https://just-maroon-sxshpvocrv.edgeone.app/                              
 https://95046961games-tetris.edgeone.app                            
 https://diplomatic-beige-obdrj6zgz4.edgeone.app/                                                     
-https://tough-cyan-l0ebjgzjob.edgeone.app
+https://tough-cyan-l0ebjgzjob.edgeone.app                                          
+https://95046961games-space-invaders.edgeone.app                                  
