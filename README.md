@@ -1,5 +1,6 @@
 links to games are here
 ==========================================
+(U may have 2 reload sometimes)
 https://9504696games-stic-hook-6.edgeone.app           
 https://95046961games-hopper.edgeone.app           
 https://95046961games-wall-runner.edgeone.app           
